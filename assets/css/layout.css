@@ -1,0 +1,85 @@
+/* Header, mobile menu and footer, shared by every page. */
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--header-h);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .container { height: 100%; display: flex; align-items: center; gap: 16px; }
+
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: var(--fs-lg); letter-spacing: -0.02em; }
+.logo-mark {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
+  background: var(--text); color: var(--bg); font: 700 14px/1 var(--font-latin);
+}
+.logo-text span { color: var(--accent); }
+
+.site-nav { margin-inline-start: auto; }
+.nav-list { list-style: none; display: flex; align-items: center; gap: 4px; }
+.nav-list a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
+  border-radius: var(--radius-pill); text-decoration: none; color: var(--text-2); font-weight: 500;
+  transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+.nav-list a:hover { color: var(--text); background: var(--surface-2); }
+.nav-list a[aria-current="page"], .nav-list a[aria-current="true"] { color: var(--text); }
+
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.lang-link {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 12px;
+  border-radius: var(--radius-pill); text-decoration: none; color: var(--text-2); font-weight: 600;
+}
+.lang-link:hover { color: var(--text); background: var(--surface-2); }
+.lang-link[lang="ar"] { font-family: var(--font-arabic); }
+.lang-link[lang="en"] { font-family: var(--font-latin); }
+
+.menu-toggle {
+  display: none; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border: 1px solid var(--line); border-radius: var(--radius-pill); background: transparent; color: var(--text); cursor: pointer;
+}
+.menu-toggle svg { width: 20px; height: 20px; }
+.menu-toggle .icon-close { display: none; }
+.menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+.menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+/* Phones: nav collapses into a disclosure panel under the header */
+@media (max-width: 759px) {
+  .menu-toggle { display: inline-flex; }
+  .header-cv { display: none; }
+  .site-nav {
+    position: absolute; inset-inline: 0; top: var(--header-h);
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    padding: 8px var(--gutter) 20px;
+    display: none;
+  }
+  .site-nav.is-open { display: block; }
+  .nav-list { flex-direction: column; align-items: stretch; gap: 2px; }
+  .nav-list a { min-height: 48px; font-size: var(--fs-lg); }
+  .nav-cv { display: block; margin-top: 12px; }
+  .nav-cv .btn { width: 100%; }
+}
+@media (min-width: 760px) {
+  .nav-cv { display: none; }
+}
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--line); padding-block: 32px; color: var(--text-3); font-size: var(--fs-sm); }
+.site-footer .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--text-2); }
+.footer-links a:hover { color: var(--text); }
+
+/* Case study page frame */
+.case-back {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 24px;
+  text-decoration: none; color: var(--text-2); font-weight: 500;
+}
+.case-back:hover { color: var(--text); }
+.case-back svg { width: 18px; height: 18px; }
+:root[dir="rtl"] .case-back svg { transform: scaleX(-1); }
+.case-hero { padding-block: 32px 56px; }
+.case-page { padding-bottom: var(--space-section); }
+.case-hero h1 { font-size: var(--fs-xl); margin-top: 12px; }
